@@ -14,7 +14,7 @@ private:
 		Node() {}
 		Node(const Node& other) {
 			m_elem = other.m_elem;
-			delete[] m_next;
+			delete m_next;
 			m_next = new Node();
 			m_next = other.m_next;
 		}
@@ -86,7 +86,7 @@ public:
 		}
 	}
 	List(const List<T>& other) {
-		delete[] m_first;
+		delete m_first;
 		m_first = new Node(other.m_first->m_elem);
 		Node* temp = m_first;
 		Node* hope = other.m_first;
@@ -99,7 +99,7 @@ public:
 		}
 	}
 	List(const std::initializer_list<T>& list) {
-		delete[] m_first;
+		delete m_first;
 		m_first = new Node(*list.begin());
 		Node* temp = m_first;
 		for (auto it = list.begin() + 1; it < list.end(); ++it) {
@@ -115,14 +115,14 @@ public:
 		Node* temp = m_first;
 		while (temp) {
 			Node* temp2 = temp->m_next;
-			delete[] temp;
+			delete temp;
 			temp = temp2;
 		}
 	}
 	const List& operator=(const List& other) {
 		if (this == &other)
 			return *this;
-		delete[] m_first;
+		this->clear();
 		m_first = new Node(other.m_first->m_elem);
 		Node* temp1 = m_first;
 		Node* temp2 = other.m_first->m_next;
